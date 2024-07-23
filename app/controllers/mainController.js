@@ -18,7 +18,8 @@ const mainController = {
       return next();
     }
 
-    const figurine = dataMapper.getOneFigurine(id);
+    const figurine = await dataMapper.getOneFigurine(id);
+    console.log(figurine);
     response.render("article", { figurine });
   },
 };
