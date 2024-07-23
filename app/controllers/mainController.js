@@ -11,16 +11,15 @@ const mainController = {
   async articlePage(request, response, next) {
     const id = request.params.id;
     // Vérifier si l'id est nombre entier
-    const figurineId = id.match(/article\d+$/);
-    // Si c'est un nombre entier => convertit l'id (string de l'url) en nombre
+    const figurineId = /\d+$/.test(id);
+
     if (figurineId) {
-      req.params.id = Number(id);
-      return next();
+      const figurine = await dataMapper.getOneFigurine(id);
+
+      return response.render("article", { figurine });
     }
 
-    const figurine = await dataMapper.getOneFigurine(id);
-    console.log(figurine);
-    response.render("article", { figurine });
+    return response.status(500).send("Une erreur");
   },
 };
 

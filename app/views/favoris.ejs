@@ -1,5 +1,6 @@
 <%- include('partials/header') %>
 
+
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg fixed-top">
     <div class="container">
@@ -48,40 +49,34 @@
               <th></th>
             </thead>
             <tbody>
+                <% if (locals.bookmarks) { %>
+                 
+                
+              <% for( const bookmark of bookmarks ) { %>
+              
+             
               <tr>
                 <td>
-                  <img class="img-thumbnail img-cart-list" src="./images/tifa.png" alt="">
+                  <img class="img-thumbnail img-cart-list" src="/images/<%= bookmark.name.toLowerCase() %>.png" alt="">
                   <div class="item-description">
-                      <h5 class="item-title">Tifa</h5>
+                      <h5 class="item-title"><%= bookmark.name %></h5>
                   </div>
                 </td>
 
                 <td>
-                  <p class="item-subtotal">$24.99</p>
+                  <p class="item-subtotal"><%= bookmark.price %>€</p>
                 </td>
 
                 <td>
-                  <a href="#">Enlever de la liste</a>
+                  <a href="/bookmarks/delete/<%= bookmark.id %>">Enlever de la liste</a>
                 </td>
               </tr>
 
-              <tr>
-                <td>
-                  <img class="img-thumbnail img-cart-list" src="./images/cloud.png" alt="">
-                  <div class="item-description">
-                      <h5 class="item-title">Cloud</h5>
-                  </div>
-                </td>
+              <% } %>
+              
+              <% } %>
 
-                <td>
-                  <p class="item-subtotal">$49.98</p>
-                </td>
-
-                <td>
-                  <a href="#">Enlever de la liste</a>
-                </td>
-              </tr>
-
+            </tbody>
           </table>
 
           <div class="row">
