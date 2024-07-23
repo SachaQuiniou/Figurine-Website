@@ -9,6 +9,9 @@ const router = express.Router();
 // page d'accueil
 router.get("/", mainController.homePage);
 
+//page category
+router.get("/category/:nameCategory", mainController.categoryPage);
+
 // page article
 router.get("/article/:id", mainController.articlePage);
 

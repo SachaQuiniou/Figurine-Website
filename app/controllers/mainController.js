@@ -4,7 +4,8 @@ const mainController = {
   // méthode pour la page d'accueil
   async homePage(request, response) {
     const figurines = await dataMapper.getAllFigurines();
-    response.render("accueil", { figurines });
+    const count = await dataMapper.CounterCategory();
+    response.render("accueil", { figurines, count });
   },
 
   // méthode pour la page article
@@ -16,11 +17,19 @@ const mainController = {
     if (figurineId) {
       const figurine = await dataMapper.getOneFigurine(id);
       const reviews = await dataMapper.getOneReview(id);
-
-      return response.render("article", { figurine, reviews });
+      const count = await dataMapper.CounterCategory();
+      return response.render("article", { figurine, reviews, count });
     }
 
     return response.status(500).send("Une erreur");
+  },
+
+  async categoryPage(request, response) {
+    const nameCategory = request.params.nameCategory;
+    const count = await dataMapper.CounterCategory();
+    const category = await dataMapper.getCategoryOfFigurine(nameCategory);
+    console.log("REQUETE", category);
+    return response.render("category", { category, count });
   },
 };
 
