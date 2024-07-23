@@ -15,8 +15,9 @@ const mainController = {
 
     if (figurineId) {
       const figurine = await dataMapper.getOneFigurine(id);
+      const reviews = await dataMapper.getOneReview(id);
 
-      return response.render("article", { figurine });
+      return response.render("article", { figurine, reviews });
     }
 
     return response.status(500).send("Une erreur");
